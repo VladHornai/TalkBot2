@@ -7,20 +7,20 @@ import "./app.css";
 
 export default function App() {
   const { recorderState, ...handlers } = useRecorder();
-  const { audio } = recorderState;
+  const { audio, text } = recorderState;
 
   return (
     <View style={styles.container}>
       <div className="recorder-container">
         <RecorderControls recorderState={recorderState} handlers={handlers} />
         <RecordingsList audio={audio != null ? audio[0] : null} />
-        <Text>HELLO</Text>
-        {console.log("!!!" + div.textContent)}
+        <Text>{text}</Text>
+        {/* {console.log("!!!" + div.textContent)}
         {console.log("!!!" + (audio != null ? audio[0] : null))}
-        {console.log("!!!" + (audio != null ? audio[1] : null))}
+        {console.log("!!!" + (audio != null ? audio[1] : null))} */}
       </div>
     </View>
-  );
+  ); 
 }
 
 const styles = StyleSheet.create({

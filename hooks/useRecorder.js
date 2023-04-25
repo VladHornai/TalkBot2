@@ -79,7 +79,6 @@ export default function useRecorder() {
 
         setRecorderState((prevState) => {
           let url = window.URL.createObjectURL(blob);
-          let resp = null;
           let formData = new FormData();
           formData.append("file_from_react", blob, "1.wav");
           axios
@@ -89,13 +88,11 @@ export default function useRecorder() {
               },
             })
             .then((response) => {
-              console.log(typeof(response));
               console.log("response: " + response.data.result);
-              resp = response.data.result;
-              const div = document.getElementsByClassName("recorder-container");
-              // div.setAttribute('class', 'my-class')
-              div.textContent = response.data.result;
-              //document.body.append(div);
+
+              setRecorderState((prevState) => {
+                return { ...prevState, text: response.data.result };
+              });
             })
             .catch((error) => {
               if (error.response) {
@@ -104,11 +101,11 @@ export default function useRecorder() {
                 console.log(error.response.headers);
               }
             });
-           
+
           if (prevState.mediaRecorder)
             return {
               ...initialState,
-              audio: [url, resp],
+              audio: url,
             };
           else return initialState;
         });
@@ -128,6 +125,3 @@ export default function useRecorder() {
     saveRecording: () => saveRecording(recorderState.mediaRecorder),
   };
 }
-
-
-
