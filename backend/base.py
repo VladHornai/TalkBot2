@@ -19,22 +19,13 @@ def transcribe(audio):
     print("after pipe")
     return text
 
-def save_to_file(filename, filestorage):
-    with open(filename, 'wb') as file:
-        file.write(filestorage.getbuffer().tobytes())
-
-
 @app.route('/profile', methods=['POST'])
 def upload_file():
     """Handles the upload of a file."""
     d = {}
     try:
         file = request.files['file_from_react']
-        filename = '/home/vlad/TalkBot2/2.ogg'
-        save_to_file(filename, file.stream._file)
-         
-        print(f"Uploading file {filename}")
-        text = transcribe(filename)
+        text = transcribe(file.stream._file.getbuffer().tobytes())
 
         d['status'] = 1
         d['result'] = text
