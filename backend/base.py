@@ -3,27 +3,15 @@ from io import BytesIO
 from flask_cors import CORS
 from transformers import pipeline
 from numpy import fromfile
-import processing_utils
 import _io
 
 app = Flask(__name__)
 CORS(app)
 
-# @app.route('/profile', methods=['GET'])
-# def my_profile():
-#     response_body = {
-#         "name": "Vlad",
-#         "about":"Hello! This is the begining of disertation thesis"
-#     }
-
-#     return response_body
-
-
 def audio_from_file(file):
     return processing_utils.audio_from_file(file)
 
 pipe = pipeline(model="VladHornai/whisper-small-ro") 
-print("type is: ", type(pipe))
 
 def transcribe(audio):
     print("before pipe", len(audio))
