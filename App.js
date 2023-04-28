@@ -2,8 +2,8 @@ import RecorderControls from "./components/recorder-controls";
 import RecordingsList from "./components/recordings-list";
 import useRecorder from "./hooks/useRecorder";
 import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaProvider } from 'react-native-safe-area-context'; 
-import Container from '@mui/material/Container';
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import Container from "@mui/material/Container";
 import "./app.css";
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
       <View style={styles.container}>
         <Container className="recorder-container" maxWidth="sm">
           <RecorderControls recorderState={recorderState} handlers={handlers} />
-          <RecordingsList audio={audio} />
+          <RecordingsList audio={audio} text={text} />
           <Text>{text}</Text>
         </Container>
       </View>

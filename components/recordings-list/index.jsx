@@ -8,20 +8,19 @@ import useRecorder from "../../hooks/useRecorder";
 import { Text } from "react-native";
 import "./styles.css";
 
-export default function RecordingsList({ audio }) {
-  const { recordings, deleteAudio } = useRecordingsList(audio);
-  const { recorderState } = useRecorder();
-  const { text } = recorderState;
+export default function RecordingsList({ audio, text }) {
+  const { recordings, deleteAudio, attachTextToAudio } = useRecordingsList(audio);
 
   return (
     <div className="recordings-container">
       {recordings.length > 0 ? (
         <>
-          {console.log("inside component" + { text })}
+
           <h1>Your recordings</h1>
           <div className="recordings-list">
             {recordings.map((record) => (
               <div className="enclosing-div">
+                {console.log("inside component: " + text)}
                 <div className="record" key={record.key}>
                   <audio controls src={record.audio} />
 
@@ -35,7 +34,7 @@ export default function RecordingsList({ audio }) {
                     </button>
                   </div>
                 </div>
-                <div className="text">HELLO</div>
+                <div className="text">{attachTextToAudio(record.key, text)}</div>
               </div>
             ))}
           </div>
