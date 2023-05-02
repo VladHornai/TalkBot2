@@ -9,7 +9,7 @@ import { Text } from "react-native";
 import "./styles.css";
 
 export default function RecordingsList({ audio, text }) {
-  const { recordings, deleteAudio, attachTextToAudio } = useRecordingsList(audio);
+  const { recordings, deleteAudio, attachTextToAudio } = useRecordingsList(audio, text);
 
   return (
     <div className="recordings-container">
@@ -32,9 +32,16 @@ export default function RecordingsList({ audio, text }) {
                     >
                       <FontAwesomeIcon icon={faTrashAlt} />
                     </button>
+                    <button
+                      className="text-button"
+                      title="text button"
+                      onClick={() => attachTextToAudio(record.key, text)}
+                    >
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                    </button>
                   </div>
                 </div>
-                <div className="text">{attachTextToAudio(record.key, text)}</div>
+                <div className="text">{record.text}</div> 
               </div>
             ))}
           </div>
