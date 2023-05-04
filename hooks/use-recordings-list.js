@@ -3,7 +3,7 @@ import { deleteAudio, attachTextToAudio } from "../handlers/recordings-list";
 import generateKey from "../utils/generate-key";
 import useRecorder from "../hooks/useRecorder";
 
-export default function useRecordingsList(audio) {
+export default function useRecordingsList(audio, text) {
   const [recordings, setRecordings] = useState([]);
   useEffect(() => {
     if (audio) {
@@ -12,6 +12,14 @@ export default function useRecordingsList(audio) {
       });
     }
   }, [audio]);
+
+  // useEffect(() => {
+  //   if (audio) {
+  //     setRecordings((prevState) => {
+  //       return [...prevState, { key: generateKey(), audio, text: null }];
+  //     });
+  //   }
+  // }, [text]);
 
   return {
     recordings,

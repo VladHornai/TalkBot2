@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Container from "@mui/material/Container";
 import "./app.css";
+import { Button } from "@mui/material";
 
 export default function App() {
   const { recorderState, ...handlers } = useRecorder();

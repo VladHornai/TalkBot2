@@ -12,7 +12,7 @@ export function attachTextToAudio(audioKey, text, setRecordings) {
         prevState[i].text = text;
       }
     }
-
+    console.log(prevState);
     return prevState;
   });
 
