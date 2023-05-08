@@ -13,14 +13,6 @@ export default function useRecordingsList(audio, text) {
     }
   }, [audio]);
 
-  // useEffect(() => {
-  //   if (audio) {
-  //     setRecordings((prevState) => {
-  //       return [...prevState, { key: generateKey(), audio, text: null }];
-  //     });
-  //   }
-  // }, [text]);
-
   return {
     recordings,
     deleteAudio: (audioKey) => deleteAudio(audioKey, setRecordings),

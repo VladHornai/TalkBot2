@@ -1,9 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMicrophone, faTimes, faSave } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMicrophone,
+  faTimes,
+  faSave,
+} from "@fortawesome/free-solid-svg-icons";
 import { formatMinutes, formatSeconds } from "../../utils/format-time";
 import "./styles.css";
 
-export default function RecorderControls({ recorderState, handlers }) {
+export default function RecorderControls({
+  recorderState,
+  handlers,
+  setLoading,
+}) {
   const { recordingMinutes, recordingSeconds, initRecording } = recorderState;
   const { startRecording, saveRecording, cancelRecording } = handlers;
 
@@ -18,7 +26,11 @@ export default function RecorderControls({ recorderState, handlers }) {
         </div>
         {initRecording && (
           <div className="cancel-button-container">
-            <button className="cancel-button" title="Cancel recording" onClick={cancelRecording}>
+            <button
+              className="cancel-button"
+              title="Cancel recording"
+              onClick={cancelRecording}
+            >
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
@@ -30,12 +42,19 @@ export default function RecorderControls({ recorderState, handlers }) {
             className="start-button"
             title="Save recording"
             disabled={recordingSeconds === 0}
-            onClick={saveRecording}
+            onClick={() => {
+              setLoading(true);
+              saveRecording();
+            }}
           >
             <FontAwesomeIcon icon={faSave} size="2x" />
           </button>
         ) : (
-          <button className="start-button" title="Start recording" onClick={startRecording}>
+          <button
+            className="start-button"
+            title="Start recording"
+            onClick={startRecording}
+          >
             <FontAwesomeIcon icon={faMicrophone} size="2x" />
           </button>
         )}
