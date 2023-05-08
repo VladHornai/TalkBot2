@@ -15,12 +15,27 @@ export default function App() {
 
   const [recordingList, setRecordingList] = useState([]);
 
+  const [recordingState, setRecordingState] = useState("WAITING_TO_RECORD");
+
   useEffect(() => {
     if (!recorderState.initRecording && recorderState.text) {
       setLoading(false);
       const { audio, text } = recorderState;
 
       setRecordingList((prev) => [...prev, { audio, text }].reverse());
+      setRecordingState("WAITING_TO_RECORD");
+    }
+
+    if (recorderState.initRecording) {
+      setRecordingState("RECORDING");
+    }
+
+    if (
+      !recorderState.initRecording &&
+      !recorderState.text &&
+      recordingState === "RECORDING"
+    ) {
+      setRecordingState("SAVING_RECORD");
     }
   }, [recorderState]);
 
@@ -32,6 +47,7 @@ export default function App() {
             recorderState={recorderState}
             handlers={handlers}
             setLoading={setLoading}
+            recordingState={recordingState}
           />
 
           {loading && <p>Loading...</p>}
@@ -52,8 +68,12 @@ export default function App() {
                 </Grid>
               </>
             )}
-            {recordingList.map((rec) => (
-              <RecordingsList audio={rec.audio} text={rec.text} />
+            {recordingList.map((rec, idx) => (
+              <RecordingsList
+                key={`record-item-${idx}`}
+                audio={rec.audio}
+                text={rec.text}
+              />
             ))}
           </Grid>
         </Container>
