@@ -1,12 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMicrophone,
-  faTimes,
-  faSave,
-} from "@fortawesome/free-solid-svg-icons";
 import { formatMinutes, formatSeconds } from "../../utils/format-time";
 import "./styles.css";
-import RecorderControl from "./RecorderControl";
+import RecorderControl from "./Recorder";
 
 export default function RecorderControls({
   recorderState,
@@ -18,10 +12,18 @@ export default function RecorderControls({
   const { startRecording, saveRecording, cancelRecording } = handlers;
 
   return (
-    <RecorderControl
-      recordingState={recordingState}
-      startRecording={startRecording}
-      saveRecording={saveRecording}
-    />
+    <div
+      style={{
+        position: "fixed",
+        bottom: 10,
+        width: "100%",
+      }}
+    >
+      <RecorderControl
+        recordingState={recordingState}
+        startRecording={startRecording}
+        saveRecording={saveRecording}
+      />
+    </div>
   );
 }
