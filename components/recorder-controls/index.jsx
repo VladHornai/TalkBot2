@@ -1,5 +1,4 @@
 import { formatMinutes, formatSeconds } from "../../utils/format-time";
-import "./styles.css";
 import RecorderControl from "./Recorder";
 
 export default function RecorderControls({

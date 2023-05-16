@@ -82,7 +82,7 @@ export default function useRecorder() {
           let formData = new FormData();
           formData.append("file_from_react", blob, "1.wav");
           axios
-            .post("http://192.168.0.112:5000/profile", formData, {
+            .post("http://192.168.100.60:5000/profile", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
