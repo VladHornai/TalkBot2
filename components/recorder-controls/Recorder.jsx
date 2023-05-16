@@ -62,7 +62,11 @@ const RecorderIcon = ({
 
   return (
     <Box
-      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <Box sx={{ m: 1, position: "relative" }}>
         <Fab color={color} onClick={onClick}>

@@ -3,9 +3,8 @@ import useRecorder from "./hooks/useRecorder";
 import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Container from "@mui/material/Container";
-import "./app.css";
 import { useEffect, useState } from "react";
-import { Alert, Grid, Typography } from "@mui/material";
+import { Alert, Grid, IconButton, Typography } from "@mui/material";
 import RecordingItem from "./components/recordings-list/RecordingItem";
 
 export default function App() {
@@ -37,19 +36,26 @@ export default function App() {
     ) {
       setRecordingState("SAVING_RECORD");
     }
+
+    console.log(recordingList);
   }, [recorderState]);
+
+  const deleteRecoding = (audio) => {
+    setRecordingList((prevState) =>
+      prevState.filter((record) => record.audio !== audio)
+    );
+  };
 
   return (
     <SafeAreaProvider>
       <View>
+        <RecorderControls
+          recorderState={recorderState}
+          handlers={handlers}
+          setLoading={setLoading}
+          recordingState={recordingState}
+        />
         <Container>
-          <RecorderControls
-            recorderState={recorderState}
-            handlers={handlers}
-            setLoading={setLoading}
-            recordingState={recordingState}
-          />
-
           {loading && <p>Loading...</p>}
 
           <Grid container sx={{ mt: 3 }}>
@@ -60,6 +66,7 @@ export default function App() {
             )}
             {recordingList.map((rec, idx) => (
               <RecordingItem
+                onDelete={() => deleteRecoding(rec.audio)}
                 key={`record-item-${idx}`}
                 audio={rec.audio}
                 text={rec.text}

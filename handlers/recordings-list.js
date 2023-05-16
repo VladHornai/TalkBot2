@@ -15,12 +15,4 @@ export function attachTextToAudio(audioKey, text, setRecordings) {
     console.log(prevState);
     return prevState;
   });
-
-  // setRecordings((prevState) => {
-  //   prevState.map((record) => {
-  //     if (record.key == audioKey) record.text = text;
-  //   });
-
-  //   return prevState;
-  // });
 }
