@@ -14,6 +14,7 @@ const initialState = {
 
 export default function useRecorder() {
   const [recorderState, setRecorderState] = useState(initialState);
+  const [currentModel, setCurrentModel] = useState("whisper-large-ro");
 
   useEffect(() => {
     const MAX_RECORDER_TIME = 5;
@@ -82,11 +83,15 @@ export default function useRecorder() {
           let formData = new FormData();
           formData.append("file_from_react", blob, "1.wav");
           axios
-            .post("http://192.168.100.60:5000/profile", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
+            .post(
+              `http://192.168.0.112:5000/profile?model=${currentModel}`,
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }
+            )
             .then((response) => {
               console.log("response: " + response.data.result);
 
@@ -124,5 +129,7 @@ export default function useRecorder() {
     startRecording: () => startRecording(setRecorderState),
     cancelRecording: () => setRecorderState(initialState),
     saveRecording: () => saveRecording(recorderState.mediaRecorder),
+    currentModel,
+    setCurrentModel,
   };
 }
