@@ -1,31 +1,17 @@
-// const ModelSelector = ({ currentModel, setCurrentModel }) => {
-//   return (
-
-//   );
-// };
-
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import {
-  Alert,
   Box,
   Fab,
   FormControl,
-  Grid,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
-  Typography,
 } from "@mui/material";
 
-// export default function AlertDialog() {
 const ModelSelector = ({ currentModel, setCurrentModel }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -70,13 +56,14 @@ const ModelSelector = ({ currentModel, setCurrentModel }) => {
                 value={currentModel}
                 label="Model"
                 onChange={(event) => {
-                  console.log(event.target.value);
                   setCurrentModel(event.target.value);
                   handleClose();
                 }}
               >
                 <MenuItem value={"whisper-small-ro"}>Whisper Small</MenuItem>
                 <MenuItem value={"whisper-large-ro"}>Whisper Large</MenuItem>
+                <MenuItem value={"whisper-large-swara"}>Whisper Swara</MenuItem>
+                <MenuItem value={"whisper-large-mara-2"}>Whisper Mara</MenuItem>
               </Select>
             </FormControl>
           </Box>

@@ -1,21 +1,10 @@
-import { formatMinutes, formatSeconds } from "../../utils/format-time";
+import About from "../About";
 import ModelSelector from "../ModelSelector";
 import RecorderControl from "./Recorder";
 
-export default function RecorderControls({
-  recorderState,
-  handlers,
-  setLoading,
-  recordingState,
-}) {
-  const { recordingMinutes, recordingSeconds, initRecording } = recorderState;
-  const {
-    currentModel,
-    setCurrentModel,
-    startRecording,
-    saveRecording,
-    cancelRecording,
-  } = handlers;
+export default function RecorderControls({ handlers, recordingState }) {
+  const { currentModel, setCurrentModel, startRecording, saveRecording } =
+    handlers;
 
   return (
     <div
@@ -43,6 +32,7 @@ export default function RecorderControls({
           startRecording={startRecording}
           saveRecording={saveRecording}
         />
+        <About currentModel={currentModel} setCurrentModel={setCurrentModel} />
       </div>
     </div>
   );

@@ -84,7 +84,7 @@ export default function useRecorder() {
           formData.append("file_from_react", blob, "1.wav");
           axios
             .post(
-              `http://192.168.0.112:5000/profile?model=${currentModel}`,
+              `http://192.168.100.60:5000/profile?model=${currentModel}`,
               formData,
               {
                 headers: {
@@ -93,8 +93,6 @@ export default function useRecorder() {
               }
             )
             .then((response) => {
-              console.log("response: " + response.data.result);
-
               setRecorderState((prevState) => {
                 return { ...prevState, text: response.data.result };
               });

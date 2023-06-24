@@ -4,20 +4,23 @@ import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  Box,
-  FormControl,
-  Grid,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Alert, Grid } from "@mui/material";
 import RecordingItem from "./components/recordings-list/RecordingItem";
-import { red } from "@mui/material/colors";
-import ModelSelector from "./components/ModelSelector";
+
+const getModelBoxBgColor = (model) => {
+  switch (model) {
+    case "whisper-small-ro":
+      return "#78d2bf";
+    case "whisper-small":
+      return "#def4f0";
+    case "whisper-large-swara":
+      return "#FFB6C1";
+    case "whisper-large-mara-2":
+      return "#FFFFE0";
+    default:
+      return "#def4f0";
+  }
+};
 
 export default function App() {
   const { recorderState, ...handlers } = useRecorder();
@@ -53,8 +56,6 @@ export default function App() {
     ) {
       setRecordingState("SAVING_RECORD");
     }
-
-    console.log(recordingList);
   }, [recorderState]);
 
   const deleteRecoding = (audio) => {
@@ -68,13 +69,9 @@ export default function App() {
         <RecorderControls
           recorderState={recorderState}
           handlers={handlers}
-          setLoading={setLoading}
           recordingState={recordingState}
         />
-        {/* <ModelSelector
-          currentModel={currentModel}
-          setCurrentModel={setCurrentModel}
-        /> */}
+
         <Container>
           {loading && <p>Loading...</p>}
 
@@ -90,9 +87,7 @@ export default function App() {
                 key={`record-item-${idx}`}
                 audio={rec.audio}
                 text={rec.text}
-                bgColor={
-                  rec.model === "whisper-small-ro" ? "#78d2bf" : "#def4f0"
-                }
+                bgColor={getModelBoxBgColor(rec.model)}
               />
             ))}
           </Grid>
